@@ -1,0 +1,6 @@
+data/raw
+notebooks
+tests
+.git
+.github
+**/__pycache__

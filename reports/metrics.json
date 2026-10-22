@@ -1,0 +1,488 @@
+{
+  "cleaning": [
+    "Removed 1,438 exact duplicate rows (v1 called drop_duplicates() without assigning the result)",
+    "Removed 12 rows whose identical feature vectors carry both labels",
+    "Dropped 2 dead features ['url_google_index', 'domain_google_index'] (\u224899.8% zeros in both classes)",
+    "Kept -1 as an explicit 'absent / lookup failed' value; NOT dropped by dropna() because it is not NaN",
+    "Final: 87,197 rows, 35.0% phishing"
+  ],
+  "split_sizes": {
+    "train": 52317,
+    "valid": 17440,
+    "test": 17440
+  },
+  "path_share_by_class": {
+    "legitimate": 0.19631079603569287,
+    "phishing": 0.9755665606244466
+  },
+  "baselines": {
+    "majority_accuracy": 0.6503440366972477,
+    "has_path_rule_accuracy": 0.8637614678899083,
+    "v1_method": {
+      "roc_auc": 0.7112251204811507,
+      "pr_auc": 0.5909061946600183,
+      "tpr_at_1pct_fpr": 0.10430360294957639,
+      "tpr_at_0.1pct_fpr": 0.02298638897999344,
+      "threshold": 0.5,
+      "accuracy": 0.7002293577981651,
+      "precision": 0.6279411764705882,
+      "recall": 0.3501147917349951,
+      "f1": 0.44956833017477366,
+      "fpr": 0.11153235760888733,
+      "n": 17440,
+      "features_used": [
+        "qty_vowels_domain",
+        "domain_length",
+        "url_shortened"
+      ]
+    }
+  },
+  "cv": [
+    {
+      "feature_set": "lexical",
+      "model": "logistic_regression",
+      "roc_auc": 0.96793,
+      "roc_auc_std": 0.0011,
+      "pr_auc": 0.94451,
+      "pr_auc_std": 0.00188,
+      "fit_seconds": 2.90098
+    },
+    {
+      "feature_set": "lexical",
+      "model": "random_forest",
+      "roc_auc": 0.97938,
+      "roc_auc_std": 0.00043,
+      "pr_auc": 0.9681,
+      "pr_auc_std": 0.00044,
+      "fit_seconds": 4.84599
+    },
+    {
+      "feature_set": "lexical",
+      "model": "xgboost",
+      "roc_auc": 0.98113,
+      "roc_auc_std": 0.00072,
+      "pr_auc": 0.97022,
+      "pr_auc_std": 0.00084,
+      "fit_seconds": 4.38149
+    },
+    {
+      "feature_set": "lexical",
+      "model": "lightgbm",
+      "roc_auc": 0.98075,
+      "roc_auc_std": 0.00103,
+      "pr_auc": 0.97006,
+      "pr_auc_std": 0.00104,
+      "fit_seconds": 4.05696
+    },
+    {
+      "feature_set": "network",
+      "model": "logistic_regression",
+      "roc_auc": 0.82006,
+      "roc_auc_std": 0.00556,
+      "pr_auc": 0.68542,
+      "pr_auc_std": 0.0073,
+      "fit_seconds": 0.22839
+    },
+    {
+      "feature_set": "network",
+      "model": "random_forest",
+      "roc_auc": 0.95237,
+      "roc_auc_std": 0.00217,
+      "pr_auc": 0.92286,
+      "pr_auc_std": 0.00336,
+      "fit_seconds": 7.87962
+    },
+    {
+      "feature_set": "network",
+      "model": "xgboost",
+      "roc_auc": 0.95098,
+      "roc_auc_std": 0.00165,
+      "pr_auc": 0.91994,
+      "pr_auc_std": 0.00236,
+      "fit_seconds": 2.06811
+    },
+    {
+      "feature_set": "network",
+      "model": "lightgbm",
+      "roc_auc": 0.95303,
+      "roc_auc_std": 0.00141,
+      "pr_auc": 0.92358,
+      "pr_auc_std": 0.00183,
+      "fit_seconds": 2.66839
+    },
+    {
+      "feature_set": "full",
+      "model": "logistic_regression",
+      "roc_auc": 0.98197,
+      "roc_auc_std": 0.00041,
+      "pr_auc": 0.96565,
+      "pr_auc_std": 0.00077,
+      "fit_seconds": 3.10943
+    },
+    {
+      "feature_set": "full",
+      "model": "random_forest",
+      "roc_auc": 0.99359,
+      "roc_auc_std": 0.00021,
+      "pr_auc": 0.98902,
+      "pr_auc_std": 0.00041,
+      "fit_seconds": 7.49218
+    },
+    {
+      "feature_set": "full",
+      "model": "xgboost",
+      "roc_auc": 0.99542,
+      "roc_auc_std": 0.00027,
+      "pr_auc": 0.99205,
+      "pr_auc_std": 0.0006,
+      "fit_seconds": 5.4565
+    },
+    {
+      "feature_set": "full",
+      "model": "lightgbm",
+      "roc_auc": 0.99566,
+      "roc_auc_std": 0.00022,
+      "pr_auc": 0.99243,
+      "pr_auc_std": 0.00056,
+      "fit_seconds": 5.40812
+    }
+  ],
+  "best_model_per_feature_set": {
+    "full": "lightgbm",
+    "lexical": "xgboost",
+    "network": "lightgbm"
+  },
+  "final": {
+    "lexical": {
+      "model": "xgboost",
+      "threshold": 0.8738239407539368,
+      "segment_thresholds": {
+        "homepage": 0.10099570453166962,
+        "deep_link": 0.9720767736434937
+      },
+      "test": {
+        "roc_auc": 0.9818683090084662,
+        "pr_auc": 0.9715798212498326,
+        "tpr_at_1pct_fpr": 0.7763201049524434,
+        "tpr_at_0.1pct_fpr": 0.43719252213840604,
+        "threshold": 0.8738239407539368,
+        "accuracy": 0.9123279816513762,
+        "precision": 0.9792322215229704,
+        "recall": 0.7654968842243358,
+        "f1": 0.8592728946157386,
+        "fpr": 0.008728619291130313,
+        "n": 17440
+      },
+      "test_segment_thresholds": {
+        "roc_auc": 0.9818683090084662,
+        "pr_auc": 0.9715798212498326,
+        "tpr_at_1pct_fpr": 0.7763201049524434,
+        "tpr_at_0.1pct_fpr": 0.43719252213840604,
+        "threshold": 0.5,
+        "accuracy": 0.8502866972477064,
+        "precision": 0.9668005354752343,
+        "recall": 0.5921613643817645,
+        "f1": 0.7344655751042408,
+        "fpr": 0.010932816081819785,
+        "n": 17440
+      },
+      "test_at_0.5": {
+        "roc_auc": 0.9818683090084662,
+        "pr_auc": 0.9715798212498326,
+        "tpr_at_1pct_fpr": 0.7763201049524434,
+        "tpr_at_0.1pct_fpr": 0.43719252213840604,
+        "threshold": 0.5,
+        "accuracy": 0.9392201834862385,
+        "precision": 0.9276740237691001,
+        "recall": 0.8960314857330273,
+        "f1": 0.9115782449115782,
+        "fpr": 0.037559513313348614,
+        "n": 17440
+      },
+      "stratified": [
+        {
+          "roc_auc": 0.9818683090084662,
+          "pr_auc": 0.9715798212498326,
+          "tpr_at_1pct_fpr": 0.7763201049524434,
+          "tpr_at_0.1pct_fpr": 0.43719252213840604,
+          "threshold": 0.8738239407539368,
+          "accuracy": 0.9123279816513762,
+          "precision": 0.9792322215229704,
+          "recall": 0.7654968842243358,
+          "f1": 0.8592728946157386,
+          "fpr": 0.008728619291130313,
+          "n": 17440,
+          "subset": "all URLs",
+          "phishing_share": 0.3496559633027523
+        },
+        {
+          "roc_auc": 0.8030313628615713,
+          "pr_auc": 0.12048809971318294,
+          "tpr_at_1pct_fpr": 0.1679530201342282,
+          "tpr_at_0.1pct_fpr": 0.03355704697986577,
+          "threshold": 0.8738239407539368,
+          "accuracy": 0.9841321243523317,
+          "precision": 0.75,
+          "recall": 0.020134228187919462,
+          "f1": 0.0392156862745098,
+          "fpr": 0.00010970927043335162,
+          "n": 9264,
+          "subset": "homepages",
+          "phishing_share": 0.016083765112262522
+        },
+        {
+          "roc_auc": 0.9481248824860136,
+          "pr_auc": 0.9800138175823204,
+          "tpr_at_1pct_fpr": 0.5338712388636746,
+          "tpr_at_0.1pct_fpr": 0.2832408808203059,
+          "threshold": 0.8738239407539368,
+          "accuracy": 0.8309686888454012,
+          "precision": 0.9794247323115683,
+          "recall": 0.7841654059505799,
+          "f1": 0.8709858103061987,
+          "fpr": 0.04400538841490795,
+          "n": 8176,
+          "subset": "deep links",
+          "phishing_share": 0.7276174168297456
+        }
+      ],
+      "stratified_segment_thresholds": [
+        {
+          "roc_auc": 0.9818683090084662,
+          "pr_auc": 0.9715798212498326,
+          "tpr_at_1pct_fpr": 0.7763201049524434,
+          "tpr_at_0.1pct_fpr": 0.43719252213840604,
+          "threshold": 0.5,
+          "accuracy": 0.8502866972477064,
+          "precision": 0.9668005354752343,
+          "recall": 0.5921613643817645,
+          "f1": 0.7344655751042408,
+          "fpr": 0.010932816081819785,
+          "n": 17440,
+          "subset": "all URLs",
+          "phishing_share": 0.3496559633027523
+        },
+        {
+          "roc_auc": 0.8030313628615713,
+          "pr_auc": 0.12048809971318294,
+          "tpr_at_1pct_fpr": 0.1679530201342282,
+          "tpr_at_0.1pct_fpr": 0.03355704697986577,
+          "threshold": 0.5,
+          "accuracy": 0.9767918825561313,
+          "precision": 0.21551724137931033,
+          "recall": 0.16778523489932887,
+          "f1": 0.18867924528301888,
+          "fpr": 0.009983543609434996,
+          "n": 9264,
+          "subset": "homepages",
+          "phishing_share": 0.016083765112262522
+        },
+        {
+          "roc_auc": 0.9481248824860136,
+          "pr_auc": 0.9800138175823204,
+          "tpr_at_1pct_fpr": 0.5338712388636746,
+          "tpr_at_0.1pct_fpr": 0.2832408808203059,
+          "threshold": 0.5,
+          "accuracy": 0.7069471624266145,
+          "precision": 0.9908814589665653,
+          "recall": 0.6027903849386451,
+          "f1": 0.7495819397993311,
+          "fpr": 0.014818140996856757,
+          "n": 8176,
+          "subset": "deep links",
+          "phishing_share": 0.7276174168297456
+        }
+      ]
+    },
+    "full": {
+      "model": "lightgbm",
+      "threshold": 0.8545593503562493,
+      "segment_thresholds": {
+        "homepage": 0.07022433573458654,
+        "deep_link": 0.9894532165236419
+      },
+      "test": {
+        "roc_auc": 0.9959071774199565,
+        "pr_auc": 0.9930311939176379,
+        "tpr_at_1pct_fpr": 0.9334207937028534,
+        "tpr_at_0.1pct_fpr": 0.6716956379140702,
+        "threshold": 0.8545593503562493,
+        "accuracy": 0.9672018348623853,
+        "precision": 0.9842271293375394,
+        "recall": 0.9209576910462447,
+        "f1": 0.9515418502202643,
+        "fpr": 0.007935108446482103,
+        "n": 17440
+      },
+      "test_segment_thresholds": {
+        "roc_auc": 0.9959071774199565,
+        "pr_auc": 0.9930311939176379,
+        "tpr_at_1pct_fpr": 0.9334207937028534,
+        "tpr_at_0.1pct_fpr": 0.6716956379140702,
+        "threshold": 0.5,
+        "accuracy": 0.9206995412844037,
+        "precision": 0.9808280644503365,
+        "recall": 0.788619219416202,
+        "f1": 0.8742841559858194,
+        "fpr": 0.008287779932992418,
+        "n": 17440
+      },
+      "test_at_0.5": {
+        "roc_auc": 0.9959071774199565,
+        "pr_auc": 0.9930311939176379,
+        "tpr_at_1pct_fpr": 0.9334207937028534,
+        "tpr_at_0.1pct_fpr": 0.6716956379140702,
+        "threshold": 0.5,
+        "accuracy": 0.9745412844036697,
+        "precision": 0.9646614069690993,
+        "recall": 0.9624467038373237,
+        "f1": 0.9635527827942867,
+        "fpr": 0.018956092399929465,
+        "n": 17440
+      },
+      "stratified": [
+        {
+          "roc_auc": 0.9959071774199565,
+          "pr_auc": 0.9930311939176379,
+          "tpr_at_1pct_fpr": 0.9334207937028534,
+          "tpr_at_0.1pct_fpr": 0.6716956379140702,
+          "threshold": 0.8545593503562493,
+          "accuracy": 0.9672018348623853,
+          "precision": 0.9842271293375394,
+          "recall": 0.9209576910462447,
+          "f1": 0.9515418502202643,
+          "fpr": 0.007935108446482103,
+          "n": 17440,
+          "subset": "all URLs",
+          "phishing_share": 0.3496559633027523
+        },
+        {
+          "roc_auc": 0.9749362176808638,
+          "pr_auc": 0.7053580842197716,
+          "tpr_at_1pct_fpr": 0.7315436241610739,
+          "tpr_at_0.1pct_fpr": 0.4429530201342282,
+          "threshold": 0.8545593503562493,
+          "accuracy": 0.9892055267702936,
+          "precision": 0.8888888888888888,
+          "recall": 0.37583892617449666,
+          "f1": 0.5283018867924528,
+          "fpr": 0.0007679648930334613,
+          "n": 9264,
+          "subset": "homepages",
+          "phishing_share": 0.016083765112262522
+        },
+        {
+          "roc_auc": 0.9880378970387644,
+          "pr_auc": 0.9953850317006016,
+          "tpr_at_1pct_fpr": 0.8155992603798958,
+          "tpr_at_0.1pct_fpr": 0.5310136157337367,
+          "threshold": 0.8545593503562493,
+          "accuracy": 0.9422700587084148,
+          "precision": 0.9852915116073011,
+          "recall": 0.9346108589678938,
+          "f1": 0.9592822636300897,
+          "fpr": 0.037269869779973056,
+          "n": 8176,
+          "subset": "deep links",
+          "phishing_share": 0.7276174168297456
+        }
+      ],
+      "stratified_segment_thresholds": [
+        {
+          "roc_auc": 0.9959071774199565,
+          "pr_auc": 0.9930311939176379,
+          "tpr_at_1pct_fpr": 0.9334207937028534,
+          "tpr_at_0.1pct_fpr": 0.6716956379140702,
+          "threshold": 0.5,
+          "accuracy": 0.9206995412844037,
+          "precision": 0.9808280644503365,
+          "recall": 0.788619219416202,
+          "f1": 0.8742841559858194,
+          "fpr": 0.008287779932992418,
+          "n": 17440,
+          "subset": "all URLs",
+          "phishing_share": 0.3496559633027523
+        },
+        {
+          "roc_auc": 0.9749362176808638,
+          "pr_auc": 0.7053580842197716,
+          "tpr_at_1pct_fpr": 0.7315436241610739,
+          "tpr_at_0.1pct_fpr": 0.4429530201342282,
+          "threshold": 0.5,
+          "accuracy": 0.9871545768566494,
+          "precision": 0.5815217391304348,
+          "recall": 0.7181208053691275,
+          "f1": 0.6426426426426426,
+          "fpr": 0.008447613823368075,
+          "n": 9264,
+          "subset": "homepages",
+          "phishing_share": 0.016083765112262522
+        },
+        {
+          "roc_auc": 0.9880378970387644,
+          "pr_auc": 0.9953850317006016,
+          "tpr_at_1pct_fpr": 0.8155992603798958,
+          "tpr_at_0.1pct_fpr": 0.5310136157337367,
+          "threshold": 0.5,
+          "accuracy": 0.8454011741682974,
+          "precision": 0.9963975418520873,
+          "recall": 0.7903849386451505,
+          "f1": 0.8815148106486689,
+          "fpr": 0.007633587786259542,
+          "n": 8176,
+          "subset": "deep links",
+          "phishing_share": 0.7276174168297456
+        }
+      ]
+    }
+  },
+  "deep_link_trained_full_model": {
+    "roc_auc": 0.9874328438939487,
+    "pr_auc": 0.9951020344011956,
+    "tpr_at_1pct_fpr": 0.8164397377710539,
+    "tpr_at_0.1pct_fpr": 0.5063035804336863,
+    "threshold": 0.5,
+    "accuracy": 0.9558463796477495,
+    "precision": 0.9675368139223561,
+    "recall": 0.9719280551353169,
+    "f1": 0.9697274633123689,
+    "fpr": 0.08711270767849125,
+    "n": 8176
+  },
+  "shap_importance": {
+    "lexical": {
+      "qty_slash_url": 1.8286999464035034,
+      "length_url": 0.6668000221252441,
+      "qty_dot_domain": 0.5300999879837036,
+      "directory_length": 0.4131999909877777,
+      "qty_dot_directory": 0.3874000012874603,
+      "domain_length": 0.3239000141620636,
+      "qty_vowels_domain": 0.2669000029563904,
+      "qty_hyphen_directory": 0.18199999630451202,
+      "qty_slash_directory": 0.15569999814033508,
+      "qty_dot_url": 0.1428000032901764,
+      "qty_dot_file": 0.13519999384880066,
+      "file_length": 0.11999999731779099,
+      "qty_hyphen_url": 0.10189999639987946,
+      "params_length": 0.0794999971985817,
+      "qty_dot_params": 0.07429999858140945
+    },
+    "full": {
+      "time_domain_activation": 2.0805,
+      "qty_dollar_directory": 1.9535,
+      "directory_length": 0.9852,
+      "length_url": 0.8801,
+      "qty_dot_domain": 0.6127,
+      "qty_slash_url": 0.5737,
+      "qty_questionmark_file": 0.5292,
+      "ttl_hostname": 0.4895,
+      "asn_ip": 0.4285,
+      "time_domain_expiration": 0.3435,
+      "time_response": 0.2657,
+      "domain_length": 0.2186,
+      "qty_mx_servers": 0.2141,
+      "file_length": 0.1926,
+      "qty_exclamation_directory": 0.1908
+    }
+  }
+}

@@ -1,0 +1,14 @@
+# pinned so the committed model artifacts load identically everywhere
+scikit-learn==1.9.1
+lightgbm==4.7.0
+xgboost==3.4.1
+shap==0.54.1
+numpy>=2.0
+pandas>=2.2
+joblib>=1.4
+matplotlib>=3.8
+fastapi>=0.110
+uvicorn[standard]>=0.29
+pydantic>=2.6
+streamlit>=1.35
+altair>=5.0
